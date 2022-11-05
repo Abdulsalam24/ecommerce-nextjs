@@ -1,13 +1,11 @@
 import ProductItem from "./ProductItem"
-
 import { products } from '../data'
 
 
 const Main = () => {
-
     return (
         <>
-            {products.map((product) => <ProductItem product={product} />)}
+            {products.map((product) => <ProductItem key={product.id} product={product} />)}
         </>
     )
 }

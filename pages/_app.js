@@ -1,9 +1,14 @@
+import { createStore } from 'redux'
 import '../styles/globals.css'
-import { store } from '../redux/store'
-import { Provider } from 'react' 
+import reducers from '../redux'
 
+import { Provider} from 'react-redux'
+
+const store = createStore(reducers)
 
 function MyApp({ Component, pageProps }) {
+
+
   return (
     <Provider store={store}>
       <Component {...pageProps} />

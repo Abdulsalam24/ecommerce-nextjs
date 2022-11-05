@@ -1,17 +1,34 @@
-import React from 'react'
-import product from '../assets/img/image-product-1.jpg'
-import product2 from '../assets/img/image-product-2.jpg'
 import Image from "next/image"
-import { AiOutlineMenu } from "react-icons/ai"
+import { AiOutlineShoppingCart } from "react-icons/ai"
 import { productsImg } from '../data'
+import { useDispatch, useSelector } from 'react-redux'
+
+
+import { addToCart, quantityChange } from '../redux/actions'
 
 
 const ProductItem = ({ product }) => {
 
-  console.log(product, 'prodcut')
+  const dispatch = useDispatch()
+
+  const singleProduct = useSelector(state => state.productReducers)
+
+  const { quantity } = singleProduct
+
+
+  const addToQuantity = (type) => {
+    return dispatch(quantityChange(type))
+  }
+
+  const handleAddCart = () => {
+    return dispatch(addToCart(product))
+  }
+
+  console.log(singleProduct.carts.length, 'quantityquantityquantityquantity')
+
+  
 
   return (
-
     <main className="mb-10 w-full justify-between md:flex md:mx-auto md:mb-10 max-w-[1200px]">
       <div className="md:w-[40%] mx-auto max-w-xl">
         <Image src={product.image} alt="product" className="md:rounded-xl" layout="responsive" />
@@ -32,8 +49,6 @@ const ProductItem = ({ product }) => {
         <h1 className="my-4 font-bold text-3xl sm:text-4xl lg:text-6xl xl:my-7">Fall limited edition sneakers</h1>
 
         <p className="text-gray-500 sm:text-lg md:text-xl">{product.info}</p>
-
-
         <div className="my-4 flex justify-between items-center md:my-6 lg:flex-col md:items-start">
 
           <h1 className="text-2xl sm:text-3xl font-bold">${product.price}<span className="text-lg bg-lightorange text-orange font-extrabold px-1 rounded ml-3">50%</span></h1>
@@ -45,12 +60,12 @@ const ProductItem = ({ product }) => {
         <div className="lg:flex items-center gap-2">
 
           <div className="flex justify-between items-center my-5 p-4 rounded-lg bg-gray-200 font-extrabold text-2xl sm:text-3xl md:w-40">
-            <button className="text-orange">-</button>
-            <p className="text-lg md:text-xl">2</p>
-            <button className="text-orange">+</button>
+            <button className="text-orange" onClick={() => addToQuantity('DECREMENT')}>-</button>
+            <p className="text-lg md:text-xl">{quantity}</p>
+            <button className="text-orange" onClick={() => addToQuantity('INCREMENT')}>+</button>
           </div>
 
-          <button className="bg-orange w-full p-4 rounded-lg text-white font-bold md:text-2xl md:flex-1"><AiOutlineMenu className="inline mb-1 mr-1" /> Add To Cart</button>
+          <button className="bg-orange w-full p-4 rounded-lg text-white font-bold md:text-2xl md:flex-1" onClick={handleAddCart}><AiOutlineShoppingCart className="inline mb-1 mr-1" /> Add To Cart</button>
         </div>
       </div>
 

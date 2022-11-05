@@ -1,9 +1,10 @@
+import { combineReducers } from "redux";
+
+import productReducers from '../redux/reducers/productReducers'
 
 
+const reducers = combineReducers({
+    productReducers
+})
 
-export const addToCart = ({ newProduct }) => {
-    return {
-        type: "ADD_TO_CART",
-        payloads: newProduct
-    }
-}
+export default reducers
