@@ -1,13 +1,9 @@
-
-
-export const getCart = (product) => {
+export const getCart = (products) => {
     return {
         type: 'GET_CART',
-        payload: product
+        payload: products
     }
 }
-
-
 
 export const addToCart = (product) => {
     return {
@@ -16,6 +12,12 @@ export const addToCart = (product) => {
     }
 }
 
+export const deleteFromCart = (cart) => {
+    return {
+        type: 'DELETE_FROM_CART',
+        payload: cart
+    }
+}
 
 
 export const quantityChange = (type) => {

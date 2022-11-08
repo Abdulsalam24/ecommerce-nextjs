@@ -8,7 +8,7 @@ import { addToCart, getCart, quantityChange } from '../redux/actions'
 import { products } from '../data'
 
 
-const ProductItem = () => {
+const ProductItem = ({ product }) => {
 
   const dispatch = useDispatch()
 
@@ -22,14 +22,16 @@ const ProductItem = () => {
   }
 
   const handleAddCart = () => {
-    dispatch(addToCart(products))
-    dispatch(getCart(products))
+    dispatch(addToCart(product))
+    dispatch(getCart(product))
   }
+
 
   return (
     <main className="mb-10 w-full justify-between md:flex md:mx-auto md:mb-10 max-w-[1200px]">
       <div className="md:w-[40%] mx-auto max-w-xl">
-        <Image src={products.image} alt="product" className="md:rounded-xl" layout="responsive" />
+        
+        <Image src={product.images} alt="product" className="md:rounded-xl" layout="responsive" />
 
         <div className="hidden md:flex flex-wrap justify-between mt-10">
           {
@@ -42,14 +44,14 @@ const ProductItem = () => {
       </div>
 
       <div className="p-5 md:p-10 md:w-[55%]">
-        <p className="text-orange font-bold sm:text-xl md:text-2xl">{products.name}</p>
+        <p className="text-orange font-bold sm:text-xl md:text-2xl">{product.title}</p>
 
-        <h1 className="my-4 font-bold text-3xl sm:text-4xl lg:text-6xl xl:my-7">Fall limited edition sneakers</h1>
+        <h1 className="my-4 font-bold text-3xl sm:text-4xl lg:text-6xl xl:my-7">{product.description}</h1>
 
-        <p className="text-gray-500 sm:text-lg md:text-xl">{products.info}</p>
+        <p className="text-gray-500 sm:text-lg md:text-xl">{product.info}</p>
         <div className="my-4 flex justify-between items-center md:my-6 lg:flex-col md:items-start">
 
-          <h1 className="text-2xl sm:text-3xl font-bold">${products.price}<span className="text-lg bg-lightorange text-orange font-extrabold px-1 rounded ml-3">50%</span></h1>
+          <h1 className="text-2xl sm:text-3xl font-bold">${product.price}<span className="text-lg bg-lightorange text-orange font-extrabold px-1 rounded ml-3">50%</span></h1>
 
           <p className="text-gray-400 md:text-xl md:my-1"><del>$250.00</del></p>
         </div>

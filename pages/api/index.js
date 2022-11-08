@@ -1,12 +1,19 @@
 // import axios from 'axios';
+
+
 // //mock API
-// let API_URL = 'https://5adc8779b80f490014fb883a.mockapi.io';
-//    export default function callApi(endpoint, method = 'GET', body) {
-//        return axios({
-//            method,
-//            url: `${API_URL}/${endpoint}`,
-//            data: body
-//        }).catch(err => {
-//            console.log(err);
-//        });
+// let API_URL = 'https://dummyjson.com/products?skip=5&limit=10';
+
+// export default async function callApi(endpoint, method = 'GET') {
+//     try {
+//         return await axios({
+//             method,
+//             url: `${API_URL}/${endpoint}`,
+//         });
+//     } catch (err) {
+//         console.log(err);
+//     }
 // }
+
+
+// https://dummyjson.com/products?skip=5&limit=10

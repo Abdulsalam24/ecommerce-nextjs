@@ -2,12 +2,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai"
+import { RiDeleteBin5Line } from "react-icons/ri"
+
+
 
 import { FaTimes } from "react-icons/fa"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import avatar from '../assets/img/image-avatar.png'
-
-
+import { deleteFromCart } from '../redux/actions'
 
 const Nav = () => {
 
@@ -15,14 +17,13 @@ const Nav = () => {
 
     const [viewCart, setViewCart] = useState(false)
 
-    const carts = useSelector(state => state.productReducers.carts)
+    const dispatch = useDispatch()
 
+    const products = useSelector(state => state.productReducers)
 
-    // let check = carts.map((cart) => cart.items.image.src).join("")
+    const { carts } = products
 
-    // console.log(check, 'cartcart')
-
-
+    let check = carts.map((cart) => cart.image.src).join("")
 
     let screen
     if (typeof window !== 'undefined') {
@@ -34,6 +35,10 @@ const Nav = () => {
                 setMobile(false)
             }
         });
+    }
+
+    const handleDelete = (cart) => {
+        dispatch(deleteFromCart(cart))
     }
 
     return (
@@ -72,28 +77,46 @@ const Nav = () => {
                     }
 
                     <div className='flex items-center gap-2'>
-                        {/* <AiOutlineShoppingCart /> <i>{carts.length}</i> */}
+                        <div className='flex items-center' onClick={() => setViewCart(!viewCart)}><AiOutlineShoppingCart /> <i>{carts.length}</i></div>
                         <div>
                             <Image src={avatar} alt="product" width={30} />
                         </div>
                     </div>
                 </div>
 
+                {viewCart && (<div className='absolute bg-white top-[85px] rounded-lg w-11/12 m-auto shadow-lg p-1'
+                >
+                    <div>
+                        <h4 className='p-5 border-gray-200 border-b font-bold text-md'>Cart</h4>
+                    </div>
+                    {
+                        carts.length > 0 ? (
+                            carts.map((cart) => (
+                                <div className='p-4'>
+                                    <div className='flex items-center justify-between gap-3 text-gray-400'>
+                                        <Image className='rounded' src={check} alt='pro-imgage' width={50} height={50} />
+                                        <div className="flex-1">
+                                            <p>{cart.name}</p>
+
+
+                                            <p>{`${cart.price} * ${cart.qtn}`} <b className='text-black'> {`$${cart.price * cart.qtn}`}</b></p>
+
+                                        </div>
+
+
+                                        <i onClick={() => handleDelete(cart)}><RiDeleteBin5Line /></i>
+                                    </div>
+                                    <button className="bg-orange mt-4 w-full p-3 rounded-lg text-white font-bold md:text-2xl">checkout</button>
+                                </div>
+                            ))
+                        ) : (
+                            <div className='flex justify-center items-center py-20 text-gray-400 font-bold'>
+                                <h3>Your cart is empty</h3>
+                            </div>
+                        )
+                    }
+                </div>)}
             </nav>
-
-            {
-                // carts.map((cart) => (
-                //     <div className="cart">
-                //         <div><h4 className='p-4 border-gray-400 border-b'>cart</h4>
-                //             <div className='p-4'>
-                //                 {/* <Image src={check} alt='pro-imgage' width={50} height={50} /> */}
-                //             </div>
-                //         </div>
-                //         <button>checkout</button>
-                //     </div>
-                // ))
-
-            }
         </>
     )
 }
