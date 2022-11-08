@@ -2,8 +2,7 @@ import product from '../assets/img/image-product-1.jpg'
 import product2 from '../assets/img/image-product-2.jpg'
 
 
-export const products = [
-    {
+export const products = {
         id: "1",
         type: "men",
         image: product,
@@ -11,7 +10,6 @@ export const products = [
         info: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus deleniti officiis consequatur, esse cumque optio iusto necessitatibus mollitia cupiditate quas.",
         price: "202",
     }
-]
 
 
 export const productsImg = [

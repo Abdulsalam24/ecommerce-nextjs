@@ -18,9 +18,9 @@ const Nav = () => {
     const carts = useSelector(state => state.productReducers.carts)
 
 
-    let check = carts.map((cart) => cart.items.image.src).join("")
+    // let check = carts.map((cart) => cart.items.image.src).join("")
 
-    console.log(check, 'cartcart')
+    // console.log(check, 'cartcart')
 
 
 
@@ -72,7 +72,7 @@ const Nav = () => {
                     }
 
                     <div className='flex items-center gap-2'>
-                        <AiOutlineShoppingCart /> <i>{carts.length}</i>
+                        {/* <AiOutlineShoppingCart /> <i>{carts.length}</i> */}
                         <div>
                             <Image src={avatar} alt="product" width={30} />
                         </div>
@@ -82,16 +82,16 @@ const Nav = () => {
             </nav>
 
             {
-                carts.map((cart) => (
-                    <div className="cart">
-                        <div><h4 className='p-4 border-gray-400 border-b'>cart</h4>
-                            <div className='p-4'>
-                                <Image src={check} alt='pro-imgage' width={50} height={50} />
-                            </div>
-                        </div>
-                        <button>checkout</button>
-                    </div>
-                ))
+                // carts.map((cart) => (
+                //     <div className="cart">
+                //         <div><h4 className='p-4 border-gray-400 border-b'>cart</h4>
+                //             <div className='p-4'>
+                //                 {/* <Image src={check} alt='pro-imgage' width={50} height={50} /> */}
+                //             </div>
+                //         </div>
+                //         <button>checkout</button>
+                //     </div>
+                // ))
 
             }
         </>
