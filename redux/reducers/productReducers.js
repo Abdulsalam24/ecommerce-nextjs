@@ -18,12 +18,12 @@ const productReducers = (state = initialState, { payload, type }) => {
             if (exist) {
                 const cartItems = state.carts.map((cart) => cart.id === payload.id ? { ...cart, qtn: cart.qtn + state.quantity } : cart)
 
-                return { ...state, carts: cartItems }
+                return { ...state, carts: cartItems,quantity : 0 }
 
             } else {
                 const pro = payload
                 return {
-                    ...state, carts: [...state.carts, { ...pro, qtn: state.quantity }]
+                    ...state, carts: [...state.carts, { ...pro, qtn: state.quantity }],quantity : 0
                 }
             }
 

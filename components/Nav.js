@@ -23,7 +23,6 @@ const Nav = () => {
 
     const { carts } = products
 
-    let check = carts.map((cart) => cart.image.src).join("")
 
     let screen
     if (typeof window !== 'undefined') {
@@ -84,7 +83,7 @@ const Nav = () => {
                     </div>
                 </div>
 
-                {viewCart && (<div className='absolute bg-white top-[85px] rounded-lg w-11/12 m-auto shadow-lg p-1'
+                {viewCart && (<div className='absolute bg-white top-[85px] left-3 rounded-lg w-[95%] m-auto shadow-lg p-1'
                 >
                     <div>
                         <h4 className='p-5 border-gray-200 border-b font-bold text-md'>Cart</h4>
@@ -93,28 +92,25 @@ const Nav = () => {
                         carts.length > 0 ? (
                             carts.map((cart) => (
                                 <div className='p-4'>
-                                    <div className='flex items-center justify-between gap-3 text-gray-400'>
-                                        <Image className='rounded' src={check} alt='pro-imgage' width={50} height={50} />
+                                    <div className='flex items-center justify-between gap-3 text-gray-400 w-full'>
+                                        <Image className='rounded' src={cart.thumbnail} alt='pro-imgage' width={100} height={100} />
                                         <div className="flex-1">
-                                            <p>{cart.name}</p>
-
-
+                                            <p>{cart.title}</p>
                                             <p>{`${cart.price} * ${cart.qtn}`} <b className='text-black'> {`$${cart.price * cart.qtn}`}</b></p>
-
                                         </div>
 
 
                                         <i onClick={() => handleDelete(cart)}><RiDeleteBin5Line /></i>
                                     </div>
-                                    <button className="bg-orange mt-4 w-full p-3 rounded-lg text-white font-bold md:text-2xl">checkout</button>
                                 </div>
                             ))
-                        ) : (
-                            <div className='flex justify-center items-center py-20 text-gray-400 font-bold'>
+                            ) : (
+                                <div className='flex justify-center items-center py-20 text-gray-400 font-bold'>
                                 <h3>Your cart is empty</h3>
                             </div>
                         )
                     }
+                    <button className="bg-orange my-4 w-full p-3 rounded-lg text-white font-bold md:text-2xl">checkout</button>
                 </div>)}
             </nav>
         </>
