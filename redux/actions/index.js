@@ -20,8 +20,9 @@ export const deleteFromCart = (cart) => {
 }
 
 
-export const quantityChange = (type) => {
+export const quantityChange = (type, payload) => {
     return {
-        type
+        type,
+        payload
     }
 }

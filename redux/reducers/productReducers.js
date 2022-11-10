@@ -1,6 +1,6 @@
 const initialState = {
     carts: [],
-    product : [],
+    product: [],
     quantity: 0,
 }
 
@@ -15,26 +15,38 @@ const productReducers = (state = initialState, { payload, type }) => {
         case 'ADD_TO_CART':
             const exist = state.carts.find((x) => x.id === payload.id)
 
-            if (exist) {
-                const cartItems = state.carts.map((cart) => cart.id === payload.id ? { ...cart, qtn: cart.qtn + state.quantity } : cart)
+            const productQtn = state.product.map((x) => x.id === payload.id ? { ...x, qtn: 1 } : x)
 
-                return { ...state, carts: cartItems,quantity : 0 }
+            if (exist) {
+                const cartItems = state.carts.map((cart) => cart.id === payload.id ? { ...cart, qtn: cart.qtn + payload.qtn } : cart)
+
+                return { ...state, carts: cartItems, product: productQtn, quantity: 0 }
 
             } else {
                 const pro = payload
                 return {
-                    ...state, carts: [...state.carts, { ...pro, qtn: state.quantity }],quantity : 0
+                    ...state,product: productQtn, carts: [...state.carts, { ...pro }], quantity: 0
                 }
             }
 
+
+
         case 'INCREMENT':
-            return {
-                ...state, quantity: state.quantity + 1
-            }
+            const check = state.product.map((x) => x.id === payload ? { ...x, qtn: x.qtn + 1 } : x)
+
+            return { ...state, product: check }
+
         case 'DECREMENT':
-            return state.quantity === 0 ? { ...state, quantity: 0 } : {
-                ...state, quantity: state.quantity - 1
+            const check1 = state.product.map((x) => x.id === payload ? { ...x, qtn: --x.qtn } : x)
+            const checkItem = state.product.find((x) => x.id === payload)
+
+
+            if (checkItem.qtn < 2) {
+                const productQtn = state.product.map((x) => x.id === payload ? { ...x, qtn: 1 } : x)
+                return { ...state, product: productQtn }
             }
+
+            return { ...state, product: check1 }
 
         case 'DELETE_FROM_CART':
             const filtered = state.carts.filter((cart) => cart.id !== payload.id)
@@ -42,9 +54,6 @@ const productReducers = (state = initialState, { payload, type }) => {
             return {
                 ...state, carts: filtered
             }
-
-        // return state.carts.filter((cart) => cart.id === payload.id)
-
 
         default: return state
     }

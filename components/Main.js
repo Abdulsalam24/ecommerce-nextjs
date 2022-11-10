@@ -1,16 +1,27 @@
-import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import ProductItem from "./ProductItem"
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+
+import { Navigation } from "swiper";
 
 
 const Main = () => {
 
     const products = useSelector((state) => state.productReducers.product)
 
-
     return (
         <>
-            {products?.map((product) => <ProductItem key={product.id} product={product} />)}
+            <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+                {products?.map((product) =>
+                    <SwiperSlide key={product.id}>
+                        <ProductItem  product={product} />
+                    </SwiperSlide>
+                )}
+            </Swiper>
         </>
     )
 }

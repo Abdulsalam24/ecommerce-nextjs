@@ -1,19 +1,21 @@
 import axios from 'axios';
 import callApi from "./api"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 
 import Main from "../components/Main"
 import Meta from "../components/Meta"
 import Nav from "../components/Nav"
-
-
-import { products } from "../data"
 import { getCart } from "../redux/actions"
+import Spinner from '../components/Spinner';
 
 
 export default function Home() {
+
+  const [isLoading, setIsLoading] = useState(true)
+  const [isError, setIsError] = useState(false)
+
 
   const dispatch = useDispatch()
 
@@ -25,8 +27,12 @@ export default function Home() {
       try {
         const { data } = await axios.get('https://dummyjson.com/products?skip=5&limit=10')
         const { products } = data
+        
+        const pro = products.map((cart) => cart.id ? { ...cart, qtn: 1 } : cart)
+
         if (mount) {
-          dispatch(getCart(products))
+          dispatch(getCart(pro))
+          setIsLoading(false)
         }
       } catch (error) {
         console.log(error)
@@ -38,6 +44,8 @@ export default function Home() {
     }
   }, [])
 
+  if (isLoading) {
+    return <Spinner />}
 
   return (
     <>
@@ -46,5 +54,6 @@ export default function Home() {
       <Main />
     </>
   )
+
 }
 
