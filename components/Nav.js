@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai"
 import { RiDeleteBin5Line } from "react-icons/ri"
@@ -59,7 +58,7 @@ const Nav = () => {
         <>
             <nav className='relative border-b border-gray-100 px-2 mx-auto flex justify-between md:mb-20 max-w-[1300px] z-10'>
                 <div className='w-full py-4 flex gap-10 justify-between items-center md:py-6'>
-                    <div className="flex items-center gap-1 w-[30%]">
+                    <div className="flex items-center gap-1 w-[30%] md:w-[10%]">
                         <span className='z-10 md:hidden' onClick={() => setMobile((prevState) => !prevState)}>
                             {mobile ? <AiOutlineMenu /> : <FaTimes />}
                         </span>
