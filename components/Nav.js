@@ -5,11 +5,12 @@ import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai"
 import { RiDeleteBin5Line } from "react-icons/ri"
 
 
-
 import { FaTimes } from "react-icons/fa"
 import { useDispatch, useSelector } from 'react-redux'
 import avatar from '../assets/img/image-avatar.png'
 import { deleteFromCart } from '../redux/actions'
+
+import { useSession, signIn, signOut } from "next-auth/react"
 
 const Nav = () => {
 
@@ -47,6 +48,8 @@ const Nav = () => {
 
 
 
+    const { data: session } = useSession()
+
 
     const handleDelete = (cart) => {
         dispatch(deleteFromCart(cart))
@@ -60,7 +63,7 @@ const Nav = () => {
                         <span className='z-10 md:hidden' onClick={() => setMobile((prevState) => !prevState)}>
                             {mobile ? <AiOutlineMenu /> : <FaTimes />}
                         </span>
-                        <h1 className='text-3xl font-bold mb-2 ml-1'>sneakers</h1>
+                        <h1 className='text-black text-3xl font-bold mb-2 ml-1'>sneakers</h1>
                     </div>
 
                     <div className={`absolute ${mobile ? 'hidden' : 'block'} bg-white top-0 left-0 h-screen z-[1px] w-9/12 md:static md:h-6 md:w-full`}>
@@ -78,28 +81,39 @@ const Nav = () => {
                             <li>
                                 about
                             </li>
-                            <li>
-                                contact
-                            </li>
+
                         </ul>
                     </div>
 
-                    <div className='flex items-center gap-4'>
+                    <div className='flex items-center gap-4 md:w-[20%]'>
+                        {
+                            session ? (<>
+                                {/* Signed in as {session.user.email} <br /> */}
+
+                                <li className='font-bold list-none cursor-pointer py-1 px-2 rounded-lg bg-gray-300 hover:shadow-md text-center' onClick={() => signOut()}>Sign out </li>
+
+                            </>) : (<>
+                                {/* Not signed in <br /> */}
+                                <li className='font-bold list-none cursor-pointer py-1 px-2 rounded-lg bg-gray-300 hover:shadow-md text-center' onClick={() => signIn()}>Sign in</li>
+                            </>)
+                        }
+
                         <div className='relative cursor-pointer flex items-center' onClick={() => setViewCart(!viewCart)}>
                             <AiOutlineShoppingCart className='text-xl font-extrabold' />
                             <i className='absolute text-sm text-white bottom-3 left-2 b bg-orange  leading-4 w-6 h-4 text-center rounded-full'>{carts.length}</i>
                         </div>
 
                         <div className='w-7 md:w-10'>
-                            <Image src={avatar} alt="product" width={100} />
+                            <Image className='rounded-full' src={session ? session.user.image : avatar} alt="product" width={100} height={100} />
                         </div>
+
                     </div>
                 </div>
 
                 {<div className={`absolute transition-all duration-300 bg-white top-[85px] ${!viewCart ? 'left-[100%] md:left-[100%] lg:md:left-[120%]' : 'left-[0px] md:left-[62%]'} right-0 rounded-lg w-[95%] max-w-lg m-auto shadow-xl p-1 z-30 md:w-[35%] md:right-0 md:m-0`}
                 >
                     <div>
-                        <h4 className='p-5 border-gray-200 border-b font-bold text-md'>Cart</h4>
+                        <h4 className='text-black p-5 border-gray-200 border-b font-bold text-md'>Cart</h4>
                     </div>
                     {
                         carts.length > 0 ? (
@@ -116,7 +130,7 @@ const Nav = () => {
                                         </div>
                                     </div>
                                 ))}
-                                <h3 className='mr-3 text-right text-gray-400'>Total : <b>${total.length > 0 ? total.reduce((a, b) => a + b) : 0}</b></h3>
+                                <h3 className='mr-3 text-right text-gray-400'>Total : <b className='text-black '>${total.length > 0 ? total.reduce((a, b) => a + b) : 0}</b></h3>
                             </>
                         ) : (
                             <div className='flex justify-center items-center py-20 text-gray-400 font-bold'>

@@ -25,7 +25,7 @@ const productReducers = (state = initialState, { payload, type }) => {
             } else {
                 const pro = payload
                 return {
-                    ...state,product: productQtn, carts: [...state.carts, { ...pro }], quantity: 0
+                    ...state, product: productQtn, carts: [...state.carts, { ...pro }], quantity: 0
                 }
             }
 
@@ -39,7 +39,6 @@ const productReducers = (state = initialState, { payload, type }) => {
         case 'DECREMENT':
             const check1 = state.product.map((x) => x.id === payload ? { ...x, qtn: --x.qtn } : x)
             const checkItem = state.product.find((x) => x.id === payload)
-
 
             if (checkItem.qtn < 2) {
                 const productQtn = state.product.map((x) => x.id === payload ? { ...x, qtn: 1 } : x)
