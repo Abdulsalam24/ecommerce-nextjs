@@ -57,9 +57,9 @@ const Nav = () => {
 
     return (
         <>
-            <nav className='relative border-b border-gray-100 px-5 mx-auto flex justify-between md:mb-20 max-w-[1300px] z-10'>
-                <div className='w-full py-4 md:py-6 flex gap-10 justify-between items-center'>
-                    <div className="flex items-center gap-1">
+            <nav className='relative border-b border-gray-100 px-2 mx-auto flex justify-between md:mb-20 max-w-[1300px] z-10'>
+                <div className='w-full py-4 flex gap-10 justify-between items-center md:py-6'>
+                    <div className="flex items-center gap-1 w-[30%]">
                         <span className='z-10 md:hidden' onClick={() => setMobile((prevState) => !prevState)}>
                             {mobile ? <AiOutlineMenu /> : <FaTimes />}
                         </span>
@@ -88,13 +88,11 @@ const Nav = () => {
                     <div className='flex items-center gap-4 md:w-[20%]'>
                         {
                             session ? (<>
-                                {/* Signed in as {session.user.email} <br /> */}
 
-                                <li className='font-bold list-none cursor-pointer py-1 px-2 rounded-lg bg-gray-300 hover:shadow-md text-center' onClick={() => signOut()}>Sign out </li>
+                                <li className='font-bold list-none cursor-pointer py-1 px-2 rounded-lg bg-gray-300 hover:shadow-md text-center text-sm' onClick={() => signOut()}>Sign out </li>
 
                             </>) : (<>
-                                {/* Not signed in <br /> */}
-                                <li className='font-bold list-none cursor-pointer py-1 px-2 rounded-lg bg-gray-300 hover:shadow-md text-center' onClick={() => signIn()}>Sign in</li>
+                                <li className='font-bold list-none cursor-pointer py-1 px-2 rounded-lg bg-gray-300 hover:shadow-md text-center text-sm' onClick={() => signIn()}>Sign in</li>
                             </>)
                         }
 
