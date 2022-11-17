@@ -2,8 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  env: {
+    BASE_URL: process.env.BASE_URL,
+  },
   images: {
-    domains: ['dummyjson.com','lh3.googleusercontent.com'],
+    domains: ['dummyjson.com', 'lh3.googleusercontent.com'],
   },
 }
 

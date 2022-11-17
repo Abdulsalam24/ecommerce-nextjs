@@ -6,8 +6,6 @@ import { toast } from "react-toastify"
 import { addToCart, getCart, quantityChange } from '../redux/actions'
 
 
-
-
 const ProductItem = ({ product }) => {
 
   const dispatch = useDispatch()

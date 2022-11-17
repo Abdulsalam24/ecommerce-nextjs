@@ -10,6 +10,7 @@ import avatar from '../assets/img/image-avatar.png'
 import { deleteFromCart } from '../redux/actions'
 
 import { useSession, signIn, signOut } from "next-auth/react"
+import { checkout } from '../checkout'
 
 const Nav = () => {
 
@@ -20,9 +21,7 @@ const Nav = () => {
     const dispatch = useDispatch()
 
     const products = useSelector(state => state.productReducers)
-
     const { carts } = products
-
     const total = carts.map((x) => x.price * x.qtn)
 
     let screen
@@ -46,13 +45,55 @@ const Nav = () => {
     }, [])
 
 
-
-    const { data: session } = useSession()
-
-
     const handleDelete = (cart) => {
         dispatch(deleteFromCart(cart))
     }
+
+    const ids = [{
+        id: 'price_1M3yfmHx4K5uGuw5q7nBHOP5',
+        num: 6
+    }, {
+        id: "price_1M3yhkHx4K5uGuw53AJp1TzT",
+        num: 7
+    }, {
+        id: "price_1M3yjKHx4K5uGuw5NnnZW25p",
+        num: 8
+    }, {
+        id: "price_1M3ykCHx4K5uGuw5oWmIOebf",
+        num: 9
+    }, {
+        id: "price_1M3yl9Hx4K5uGuw5GBaWrcn6",
+        num: 10
+    }, {
+        id: "price_1M3ymAHx4K5uGuw56l2oPBaX",
+        num: 11
+    }, {
+        id: "price_1M3ynLHx4K5uGuw5dK34SyFY",
+        num: 12
+    }, {
+        id: "price_1M3ypoHx4K5uGuw5rCIB2j39",
+        num: 13
+    }, {
+        id: "price_1M3yqhHx4K5uGuw5DaS7uewR",
+        num: 14
+    }, {
+        id: "price_1M3yrSHx4K5uGuw5vk5ZxUbp",
+        num: 15
+    },
+    ]
+    const { data: session } = useSession()
+
+    let pro = []
+
+    ids.map((id) => {
+        products.carts.map((fruit) => {
+            if (id.num === fruit.id) {
+                pro.push({ price: id.id, quantity: fruit.qtn })
+            }
+        });
+    });
+
+
 
     return (
         <>
@@ -128,6 +169,7 @@ const Nav = () => {
                                     </div>
                                 ))}
                                 <h3 className='mr-3 text-right text-gray-400'>Total : <b className='text-black '>${total.length > 0 ? total.reduce((a, b) => a + b) : 0}</b></h3>
+                                <span className='ml-2 text-gray-400 text-xs'>card info: 4242424242424242 (test)</span>
                             </>
                         ) : (
                             <div className='flex justify-center items-center py-20 text-gray-400 font-bold'>
@@ -136,7 +178,18 @@ const Nav = () => {
                         )
                     }
                     <div className='text-center'>
-                        <button className="bg-orange my-4 w-11/12 p-3 rounded-lg text-white font-bold text-sm md:text-md"><i className='not-italic'>Checkout</i></button>
+
+                        <button
+                            onClick={() => checkout({
+                                lineItems: pro
+                            })}
+
+                            className="bg-orange my-4 w-11/12 p-3 rounded-lg text-white font-bold text-sm md:text-md"
+                        >
+                            <i className='not-italic'>Checkout</i>
+                        </button>
+
+
                     </div>
                 </div>}
             </nav>
