@@ -1,13 +1,11 @@
 
-// import { SessionProvider } from "next-auth/react"
+import { SessionProvider } from "next-auth/react"
 
 import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import reducers from '../redux'
 
 import { Provider } from 'react-redux'
-
-import { Provider } from "next-auth/client";
 
 import "swiper/css/bundle";
 import { ToastContainer, toast } from 'react-toastify';
@@ -28,7 +26,7 @@ function MyApp({ Component, pageProps }) {
 
 
   return (
-    <Provider session={pageProps.session}>
+    <SessionProvider session={pageProps.session}>
       <Provider store={store}>
         <Component {...pageProps} />
         <ToastContainer
@@ -44,7 +42,7 @@ function MyApp({ Component, pageProps }) {
           theme="colored"
         />
       </Provider>
-    </Provider>
+    </SessionProvider>
   )
 }
 
