@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../styles/globals.css'
 
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps:{session,...pageProps} }) {
 
   let composeEnhancers = compose;
 
@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }) {
 
 
   return (
-    <SessionProvider session={pageProps.session}>
+    <SessionProvider session={session}>
       <Provider store={store}>
         <Component {...pageProps} />
         <ToastContainer

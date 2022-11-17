@@ -9,11 +9,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import avatar from '../assets/img/image-avatar.png'
 import { deleteFromCart } from '../redux/actions'
 
-import { useSession, signIn, signOut } from "next-auth/react"
 import { checkout } from '../checkout'
+import { useSession, signIn, signOut } from "next-auth/react"
 
 const Nav = () => {
-
+    
+    const { data: session } = useSession()
     const [mobile, setMobile] = useState(true)
 
     const [viewCart, setViewCart] = useState(false)
@@ -81,7 +82,7 @@ const Nav = () => {
         num: 15
     },
     ]
-    const { data: session } = useSession()
+
 
     let pro = []
 
