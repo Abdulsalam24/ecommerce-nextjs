@@ -15,7 +15,7 @@ import { checkout } from '../checkout'
 const Nav = () => {
 
     // const { data: session } = useSession()
-    const [mobile, setMobile] = useState(true)
+    const [mobile, setMobile] = useState(false)
 
     const [viewCart, setViewCart] = useState(false)
 
@@ -31,11 +31,11 @@ const Nav = () => {
         screen = window.screen.width
         window.addEventListener("resize", () => {
 
-            if (screen > 768) {
-                setMobile(false)
-            } else {
-                setMobile(true)
-            }
+            // if (screen > 768) {
+            //     setMobile(false)
+            // } else {
+            //     setMobile(true)
+            // }
         })
     }
 
@@ -43,8 +43,10 @@ const Nav = () => {
         if (screen > 768) {
             setMobile(false)
         }
-    }, [])
 
+    }, [screen])
+
+    console.log(mobile , 'mobileee')
 
     const handleDelete = (cart) => {
         dispatch(deleteFromCart(cart))
@@ -103,12 +105,12 @@ const Nav = () => {
                 <div className='w-full py-4 flex gap-10 justify-between items-center md:py-6'>
                     <div className="flex items-center gap-1 w-[30%] md:w-[10%]">
                         <span className='z-10 md:hidden' onClick={() => setMobile((prevState) => !prevState)}>
-                            {mobile ? <AiOutlineMenu /> : <FaTimes />}
+                            {mobile ?  <FaTimes /> : <AiOutlineMenu />}
                         </span>
                         <h1 className='text-black text-3xl font-bold mb-2 ml-1 flex items-center'><i className='not-italic'>shoppy</i> <AiOutlineShoppingCart /></h1>
                     </div>
 
-                    <div className={`absolute ${mobile && 'hidden'} block bg-white top-0 left-0 h-screen z-[1px] w-9/12 md:static md:h-6 md:w-full`}>
+                    <div className={`absolute ${!mobile && 'hidden'} md:block bg-white top-0 left-0 h-screen z-[1px] w-9/12 md:static md:h-6 md:w-full`}>
                         <ul className='menu-list pt-16 px-5 font-bold md:font-medium md:flex md:p-0'>
                             <li>
                                 collection
