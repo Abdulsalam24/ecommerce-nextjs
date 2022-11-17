@@ -10,11 +10,11 @@ import avatar from '../assets/img/image-avatar.png'
 import { deleteFromCart } from '../redux/actions'
 
 import { checkout } from '../checkout'
-import { useSession, signIn, signOut } from "next-auth/react"
+// import { useSession, signIn, signOut } from "next-auth/react"
 
 const Nav = () => {
-    
-    const { data: session } = useSession()
+
+    // const { data: session } = useSession()
     const [mobile, setMobile] = useState(true)
 
     const [viewCart, setViewCart] = useState(false)
@@ -104,7 +104,7 @@ const Nav = () => {
                         <span className='z-10 md:hidden' onClick={() => setMobile((prevState) => !prevState)}>
                             {mobile ? <AiOutlineMenu /> : <FaTimes />}
                         </span>
-                        <h1 className='text-black text-3xl font-bold mb-2 ml-1'>sneakers</h1>
+                        <h1 className='text-black text-3xl font-bold mb-2 ml-1 flex items-center'><i className='not-italic'>shoppy</i> <AiOutlineShoppingCart /></h1>
                     </div>
 
                     <div className={`absolute ${mobile ? 'hidden' : 'block'} bg-white top-0 left-0 h-screen z-[1px] w-9/12 md:static md:h-6 md:w-full`}>
@@ -126,8 +126,8 @@ const Nav = () => {
                         </ul>
                     </div>
 
-                    <div className='flex items-center gap-4 md:w-[20%]'>
-                        {
+                    <div className='flex items-center gap-4 md:w-[10%]'>
+                        {/* {
                             session ? (<>
 
                                 <li className='font-bold list-none cursor-pointer py-1 px-2 rounded-lg bg-gray-300 hover:shadow-md text-center text-sm' onClick={() => signOut()}>Sign out </li>
@@ -135,7 +135,7 @@ const Nav = () => {
                             </>) : (<>
                                 <li className='font-bold list-none cursor-pointer py-1 px-2 rounded-lg bg-gray-300 hover:shadow-md text-center text-sm' onClick={() => signIn()}>Sign in</li>
                             </>)
-                        }
+                        } */}
 
                         <div className='relative cursor-pointer flex items-center' onClick={() => setViewCart(!viewCart)}>
                             <AiOutlineShoppingCart className='text-xl font-extrabold' />
@@ -143,7 +143,7 @@ const Nav = () => {
                         </div>
 
                         <div className='w-7 md:w-10'>
-                            <Image className='rounded-full' src={session ? session.user.image : avatar} alt="product" width={100} height={100} />
+                            <Image className='rounded-full' src={avatar} alt="product" width={100} height={100} />
                         </div>
 
                     </div>
