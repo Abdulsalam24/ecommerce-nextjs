@@ -99,6 +99,7 @@ const Nav = () => {
     return (
         <>
             <nav className='relative border-b border-gray-100 px-2 mx-auto flex justify-between md:mb-20 max-w-[1300px] z-10'>
+
                 <div className='w-full py-4 flex gap-10 justify-between items-center md:py-6'>
                     <div className="flex items-center gap-1 w-[30%] md:w-[10%]">
                         <span className='z-10 md:hidden' onClick={() => setMobile((prevState) => !prevState)}>
@@ -107,8 +108,7 @@ const Nav = () => {
                         <h1 className='text-black text-3xl font-bold mb-2 ml-1 flex items-center'><i className='not-italic'>shoppy</i> <AiOutlineShoppingCart /></h1>
                     </div>
 
-                    <div className={`absolute ${mobile ? 'hidden' : 'block'} bg-white top-0 left-0 h-screen z-[1px] w-9/12 md:static md:h-6 md:w-full`}>
-
+                    <div className={`absolute ${mobile && 'hidden'} block bg-white top-0 left-0 h-screen z-[1px] w-9/12 md:static md:h-6 md:w-full`}>
                         <ul className='menu-list pt-16 px-5 font-bold md:font-medium md:flex md:p-0'>
                             <li>
                                 collection
@@ -127,15 +127,6 @@ const Nav = () => {
                     </div>
 
                     <div className='flex items-center gap-4 md:w-[10%]'>
-                        {/* {
-                            session ? (<>
-
-                                <li className='font-bold list-none cursor-pointer py-1 px-2 rounded-lg bg-gray-300 hover:shadow-md text-center text-sm' onClick={() => signOut()}>Sign out </li>
-
-                            </>) : (<>
-                                <li className='font-bold list-none cursor-pointer py-1 px-2 rounded-lg bg-gray-300 hover:shadow-md text-center text-sm' onClick={() => signIn()}>Sign in</li>
-                            </>)
-                        } */}
 
                         <div className='relative cursor-pointer flex items-center' onClick={() => setViewCart(!viewCart)}>
                             <AiOutlineShoppingCart className='text-xl font-extrabold' />
@@ -145,9 +136,15 @@ const Nav = () => {
                         <div className='w-7 md:w-10'>
                             <Image className='rounded-full' src={avatar} alt="product" width={100} height={100} />
                         </div>
-
                     </div>
                 </div>
+
+
+
+
+
+
+
 
                 {<div className={`absolute transition-all duration-300 bg-white top-[85px] ${!viewCart ? 'left-[100%] md:left-[100%] lg:md:left-[120%]' : 'left-[0px] md:left-[62%]'} right-0 rounded-lg w-[95%] max-w-lg m-auto shadow-xl p-1 z-30 md:w-[35%] md:right-0 md:m-0`}
                 >
@@ -179,7 +176,6 @@ const Nav = () => {
                         )
                     }
                     <div className='text-center'>
-
                         <button
                             onClick={() => checkout({
                                 lineItems: pro
@@ -189,8 +185,6 @@ const Nav = () => {
                         >
                             <i className='not-italic'>Checkout</i>
                         </button>
-
-
                     </div>
                 </div>}
             </nav>
