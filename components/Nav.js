@@ -46,8 +46,6 @@ const Nav = () => {
 
     }, [screen])
 
-    console.log(mobile , 'mobileee')
-
     const handleDelete = (cart) => {
         dispatch(deleteFromCart(cart))
     }
@@ -84,8 +82,6 @@ const Nav = () => {
         num: 15
     },
     ]
-
-
     let pro = []
 
     ids.map((id) => {
@@ -95,8 +91,6 @@ const Nav = () => {
             }
         });
     });
-
-
 
     return (
         <>
