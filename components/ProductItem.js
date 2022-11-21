@@ -1,9 +1,8 @@
 import Image from "next/image"
 import { useState } from "react"
 import { AiOutlineShoppingCart } from "react-icons/ai"
-import { useDispatch, useSelector } from 'react-redux'
-import { toast } from "react-toastify"
-import { addToCart, getCart, quantityChange } from '../redux/actions'
+import { useDispatch } from 'react-redux'
+import { addToCart, quantityChange } from '../redux/actions'
 
 
 const ProductItem = ({ product }) => {
@@ -16,7 +15,6 @@ const ProductItem = ({ product }) => {
 
   const handleAddCart = () => {
     dispatch(addToCart(product))
-    toast.success('New product added!');
   }
 
   const [currentImg, setCurrentImg] = useState(product.images[0])

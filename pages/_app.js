@@ -8,8 +8,6 @@ import reducers from '../redux'
 import { Provider } from 'react-redux'
 
 import "swiper/css/bundle";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import '../styles/globals.css'
 
@@ -29,18 +27,6 @@ function MyApp({ Component, pageProps:{session,...pageProps} }) {
     <SessionProvider session={session}>
       <Provider store={store}>
         <Component {...pageProps} />
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss={false}
-          draggable
-          pauseOnHover={false}
-          theme="colored"
-        />
       </Provider>
     </SessionProvider>
   )
