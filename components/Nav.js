@@ -30,21 +30,23 @@ const Nav = () => {
     if (typeof window !== 'undefined') {
         screen = window.screen.width
         window.addEventListener("resize", () => {
-
-            // if (screen > 768) {
-            //     setMobile(false)
-            // } else {
-            //     setMobile(true)
-            // }
         })
     }
 
     useEffect(() => {
+        const scroll = () => {
+            if (window.scroll) {
+                setMobile(mobile);
+            }
+        };
+
+        window.addEventListener("scroll", scroll);
+
         if (screen > 768) {
             setMobile(false)
         }
 
-    }, [screen])
+    }, [screen,scroll])
 
     const handleDelete = (cart) => {
         dispatch(deleteFromCart(cart))
@@ -99,7 +101,7 @@ const Nav = () => {
                 <div className='w-full py-4 flex gap-10 justify-between items-center md:py-6'>
                     <div className="flex items-center gap-1 w-[30%] md:w-[10%]">
                         <span className='z-10 md:hidden' onClick={() => setMobile((prevState) => !prevState)}>
-                            {mobile ?  <FaTimes /> : <AiOutlineMenu />}
+                            {mobile ? <FaTimes /> : <AiOutlineMenu />}
                         </span>
                         <h1 className='text-black text-3xl font-bold mb-2 ml-1 flex items-center'><i className='not-italic'>shoppy</i> <AiOutlineShoppingCart /></h1>
                     </div>
