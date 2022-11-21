@@ -10,11 +10,8 @@ import avatar from '../assets/img/image-avatar.png'
 import { deleteFromCart } from '../redux/actions'
 
 import { checkout } from '../checkout'
-// import { useSession, signIn, signOut } from "next-auth/react"
 
 const Nav = () => {
-
-    // const { data: session } = useSession()
     const [mobile, setMobile] = useState(false)
 
     const [viewCart, setViewCart] = useState(false)
@@ -46,7 +43,7 @@ const Nav = () => {
             setMobile(false)
         }
 
-    }, [screen,scroll])
+    }, [screen, scroll])
 
     const handleDelete = (cart) => {
         dispatch(deleteFromCart(cart))
