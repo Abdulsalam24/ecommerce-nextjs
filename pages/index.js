@@ -10,8 +10,18 @@ import Nav from "../components/Nav"
 import { getCart } from "../redux/actions"
 import Spinner from '../components/Spinner';
 
+export const getServerSideProps = async () => {
+  const { data } = await axios.get('https://dummyjson.com/products?skip=5&limit=10')
+  const { products } = data
 
-export default function Home() {
+  return {
+    props: {
+      products
+    }
+  }
+}
+
+export default function Home({ products }) {
 
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
@@ -20,24 +30,21 @@ export default function Home() {
   const dispatch = useDispatch()
 
 
-
   useEffect(() => {
     let mount = true
     const fecthProducts = async () => {
       try {
-        const { data } = await axios.get('https://dummyjson.com/products?skip=5&limit=10')
-        const { products } = data
-        
-        const pro = products.map((cart) => cart.id ? { ...cart, qtn: 1 } : cart)
-
+        const pro = products?.map((cart) => cart.id ? { ...cart, qtn: 1 } : cart)
         if (mount) {
           dispatch(getCart(pro))
           setIsLoading(false)
         }
       } catch (error) {
-        console.log(error)
+        setIsError(true)
+        console.log(error, 'eroooooo')
       }
     }
+
     fecthProducts()
     return () => {
       mount = false
@@ -45,7 +52,15 @@ export default function Home() {
   }, [])
 
   if (isLoading) {
-    return <Spinner />}
+    return <Spinner />
+  }
+  if (isError) {
+    return (
+      <div className="flex justify-center item-center h-full">
+        <h3>Something is wrong</h3>
+      </div>
+    )
+  }
 
   return (
     <>

@@ -6,7 +6,8 @@ const nextConfig = {
     BASE_URL: process.env.BASE_URL,
   },
   images: {
-    domains: ['dummyjson.com', 'lh3.googleusercontent.com'],
+    domains: ['i.dummyjson.com','lh3.googleusercontent.com'],
+    
   },
 }
 
